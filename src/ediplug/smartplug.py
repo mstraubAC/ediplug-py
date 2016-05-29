@@ -140,6 +140,7 @@ class SmartPlug(object):
         self.url = "http://%s:10000/smartplug.cgi" % host
         self.auth = auth
         self.domi = getDOMImplementation()
+        self.timeout = 1
 
         self.log = log.getLogger("SmartPlug")
 
@@ -310,7 +311,7 @@ class SmartPlug(object):
 
         files = {'file': xml}
 
-        res = req.post(self.url, auth=self.auth, files=files)
+        res = req.post(self.url, auth=self.auth, files=files, timeout=self.timeout)
 
         self.log.debug("Status code: %d" % res.status_code)
         self.log.debug("Response: %s" % res.text)
@@ -346,7 +347,7 @@ class SmartPlug(object):
 
         files = {'file': xml}
 
-        res = req.post(self.url, auth=self.auth, files=files)
+        res = req.post(self.url, auth=self.auth, files=files, timeout=self.timeout)
 
         self.log.debug("Status code: %d" % res.status_code)
         self.log.debug("Response: %s" % res.text)
